@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#050b14">
+  <meta name="description" content="Nova AI - Personal AI Assistant">
+
+  <title>Nova AI</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+  <!-- =========================
+       NOVA APP
+  ========================== -->
+
+  <div id="app">
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar">
+
+      <div class="sidebar-header">
+        <div class="nova-logo">N</div>
+
+        <div>
+          <h2>Nova</h2>
+          <span>AI Assistant</span>
+        </div>
+
+        <button id="closeSidebar" class="icon-btn" aria-label="Close">
+          ×
+        </button>
+      </div>
+
+      <button id="newChatBtn" class="menu-btn">
+        ＋ New Chat
+      </button>
+
+      <button id="searchChatsBtn" class="menu-btn">
+        🔎 Search Chats
+      </button>
+
+      <button id="testConnectionBtn" class="menu-btn">
+        ⚡ Test Connection
+      </button>
+
+      <button id="googleSearchBtn" class="menu-btn">
+        🌐 Google Search
+      </button>
+
+      <button id="memoryBtn" class="menu-btn">
+        🧠 Memory
+      </button>
+
+      <button id="settingsBtn" class="menu-btn">
+        ⚙️ Settings
+      </button>
+
+      <div class="sidebar-status">
+        <span class="status-dot"></span>
+        <span id="connectionStatus">Nova Offline</span>
+      </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main id="main">
+
+      <!-- TOP BAR -->
+      <header class="topbar">
+
+        <button id="menuBtn" class="icon-btn" aria-label="Menu">
+          ☰
+        </button>
+
+        <div class="top-title">
+          <div class="mini-orb"></div>
+
+          <div>
+            <strong>Nova AI</strong>
+            <small id="modeText">Ready</small>
+          </div>
+        </div>
+
+        <button id="hudBtn" class="hud-btn">
+          HUD
+        </button>
+
+      </header>
+
+
+      <!-- JARVIS HUD -->
+      <section id="hudPanel" class="hud-panel hidden">
+
+        <div class="hud-ring">
+          <div class="hud-core">
+            <span>NOVA</span>
+            <small id="hudStatus">STANDBY</small>
+          </div>
+        </div>
+
+        <div class="hud-info">
+          <div>
+            <span>CORE</span>
+            <strong id="hudCore">ONLINE</strong>
+          </div>
+
+          <div>
+            <span>VOICE</span>
+            <strong id="hudVoice">READY</strong>
+          </div>
+
+          <div>
+            <span>TOOLS</span>
+            <strong id="hudTools">READY</strong>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- CHAT AREA -->
+      <section id="chatArea">
+
+        <!-- Welcome -->
+        <div id="welcomeScreen" class="welcome">
+
+          <div class="big-orb">
+            <div class="orb-inner">
+              N
+            </div>
+          </div>
+
+          <h1>Hello, I'm Nova.</h1>
+
+          <p>
+            Your AI assistant is ready.
+          </p>
+
+          <div class="quick-actions">
+
+            <button class="quick-btn" data-prompt="Hello Nova">
+              💬 Chat
+            </button>
+
+            <button class="quick-btn" data-prompt="What can you do?">
+              ✨ Capabilities
+            </button>
+
+            <button class="quick-btn" data-prompt="Open Nova HUD">
+              ⚡ JARVIS HUD
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- Messages -->
+        <div id="messages"></div>
+
+        <!-- Typing -->
+        <div id="typingIndicator" class="typing hidden">
+
+          <div class="typing-orb"></div>
+
+          <span>Nova is thinking...</span>
+
+        </div>
+
+      </section>
+
+
+      <!-- INPUT -->
+      <footer class="input-area">
+
+        <div class="input-tools">
+
+          <button
+            id="attachBtn"
+            class="tool-btn"
+            aria-label="Attach file">
+            📎
+          </button>
+
+          <input
+            type="file"
+            id="fileInput"
+            hidden
+            accept=".txt,.md,.json,.csv,.js,.html,.css,.py,.java,.xml,.yaml,.yml,.log,image/*">
+
+          <button
+            id="micBtn"
+            class="tool-btn"
+            aria-label="Voice input">
+            🎙️
+          </button>
+
+        </div>
+
+
+        <textarea
+          id="messageInput"
+          rows="1"
+          placeholder="Ask Nova anything..."
+          autocomplete="off"></textarea>
+
+
+        <button
+          id="sendBtn"
+          class="send-btn"
+          aria-label="Send">
+          ➤
+        </button>
+
+      </footer>
+
+    </main>
+
+
+    <!-- SETTINGS PANEL -->
+    <section id="settingsPanel" class="side-panel hidden">
+
+      <div class="panel-header">
+
+        <h2>Nova Settings</h2>
+
+        <button id="closeSettings" class="icon-btn">
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="setting-item">
+
+        <div>
+          <strong>Auto Speak</strong>
+          <small>Nova automatically speaks replies</small>
+        </div>
+
+        <label class="switch">
+
+          <input
+            type="checkbox"
+            id="autoSpeakToggle">
+
+          <span class="slider"></span>
+
+        </label>
+
+      </div>
+
+
+      <div class="setting-item">
+
+        <div>
+          <strong>JARVIS HUD</strong>
+          <small>Enable futuristic control interface</small>
+        </div>
+
+        <label class="switch">
+
+          <input
+            type="checkbox"
+            id="hudToggle"
+            checked>
+
+          <span class="slider"></span>
+
+        </label>
+
+      </div>
+
+
+      <div class="setting-item">
+
+        <div>
+          <strong>Voice</strong>
+          <small>Voice assistant features</small>
+        </div>
+
+        <label class="switch">
+
+          <input
+            type="checkbox"
+            id="voiceToggle"
+            checked>
+
+          <span class="slider"></span>
+
+        </label>
+
+      </div>
+
+    </section>
+
+
+    <!-- MEMORY PANEL -->
+    <section id="memoryPanel" class="side-panel hidden">
+
+      <div class="panel-header">
+
+        <h2>Nova Memory</h2>
+
+        <button id="closeMemory" class="icon-btn">
+          ×
+        </button>
+
+      </div>
+
+      <div id="memoryContent">
+
+        <p class="empty-state">
+          Nova memory is ready.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- SEARCH PANEL -->
+    <section id="searchPanel" class="side-panel hidden">
+
+      <div class="panel-header">
+
+        <h2>Search Chats</h2>
+
+        <button id="closeSearch" class="icon-btn">
+          ×
+        </button>
+
+      </div>
+
+      <input
+        id="chatSearchInput"
+        class="panel-input"
+        type="text"
+        placeholder="Search your chats...">
+
+      <div id="searchResults"></div>
+
+    </section>
+
+
+    <!-- FILE PREVIEW -->
+    <div id="filePreview" class="file-preview hidden">
+
+      <div class="file-info">
+
+        <span id="fileName">File</span>
+
+        <button id="removeFile" class="icon-btn">
+          ×
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- TOAST -->
+    <div id="toast" class="toast hidden"></div>
+
+  </div>
+
+
+  <!-- MAIN NOVA LOGIC -->
+  <script src="config.js"></script>
+  <script src="nova-app.js"></script>
+
+
+  <!-- PWA SERVICE WORKER -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js")
+          .catch(() => {});
+      });
+    }
+  </script>
+
+</body>
+</html>
